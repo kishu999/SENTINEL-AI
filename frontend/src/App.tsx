@@ -369,9 +369,9 @@ export const App: React.FC = () => {
         />
 
         {/* 3-Column Command Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start w-full min-w-0">
           {/* Left Column (Scenarios & Exploit Builder) - 4 cols */}
-          <div className="lg:col-span-4 flex flex-col gap-5">
+          <div className="lg:col-span-4 min-w-0 flex flex-col gap-5 w-full">
             <ScenarioSelector
               scenarios={scenarios}
               activeScenarioId={activeScenario?.id || ''}
@@ -391,12 +391,12 @@ export const App: React.FC = () => {
           </div>
 
           {/* Middle Column (X-Ray Threat Diff & SDK Code) - 4 cols */}
-          <div className="lg:col-span-4 flex flex-col gap-5">
+          <div className="lg:col-span-4 min-w-0 flex flex-col gap-5 w-full">
             <XRayDiffViewer audit={audit} firewallEnabled={firewallEnabled} />
           </div>
 
           {/* Right Column (Agent Output & Attacker Webhook Sink) - 4 cols */}
-          <div className="lg:col-span-4 flex flex-col gap-5">
+          <div className="lg:col-span-4 min-w-0 flex flex-col gap-5 w-full">
             <AgentChatView
               assistantMessage={assistantMessage}
               quarantinedTools={quarantinedTools}
