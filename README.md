@@ -12,6 +12,10 @@
 
 **Drop-In OpenAI-Compatible AI Firewall, Multi-Modal Ingestion Sanitizer, Session Taint Tracker, and Interactive "X-Ray" Security Sandbox.**
 
+**🏆 Submitted to Vihaan X • Organized by IEEE Student Branch DTU**  
+**👥 Team Learners:** Priyanshu Kumar & Kishu Tiwari  
+**📊 Presentation Deck:** [PowerPoint Pitch (.pptx)](Sentinel_AI_Vihaan_X_Pitch.pptx) • [Interactive Browser Deck (HTML)](presentation_deck.html)
+
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.110+-009688.svg?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
 [![Python](https://img.shields.io/badge/Python-3.11+-3776AB.svg?logo=python&logoColor=white)](https://www.python.org)
 [![React](https://img.shields.io/badge/React-18.2+-61DAFB.svg?logo=react&logoColor=black)](https://react.dev)
