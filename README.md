@@ -14,7 +14,6 @@
 
 **🏆 Submitted to Vihaan X • Organized by IEEE Student Branch DTU**  
 **👥 Team Learners:** Priyanshu Kumar & Kishu Tiwari  
-**📊 Presentation Deck:** [PowerPoint Pitch (.pptx)](Sentinel_AI_Vihaan_X_Pitch.pptx) • [Interactive Browser Deck (HTML)](presentation_deck.html)
 
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.110+-009688.svg?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
 [![Python](https://img.shields.io/badge/Python-3.11+-3776AB.svg?logo=python&logoColor=white)](https://www.python.org)
@@ -210,5 +209,3 @@ All tests executed on commodity hardware without GPU acceleration:
 
 ---
 
-## 📄 License
-MIT License. Built for security researchers, AI engineers, and hackathon judges.
